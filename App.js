@@ -12,6 +12,7 @@ const App = () => {
   const animatedValue = useSharedValue(1);
   const animatedHeight = useSharedValue(100);
   const animatedWidth = useSharedValue(100);
+
   //hook
   //useState render ui changes lekin animatedValue animation ko update karega bina re-render kiye
   //animatedValue.value = animatedValue.value + 1; // ye animation ko change karega lekin ui ko re-render nahi karega
