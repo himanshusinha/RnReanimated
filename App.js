@@ -1,7 +1,9 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import Animated, {
+  cancelAnimation,
   useAnimatedStyle,
   useSharedValue,
+  withRepeat,
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
@@ -24,16 +26,12 @@ const App = () => {
 
   const toggle = () => {
     // use exact assignment, and sensible heights for visible change
-    if (animatedValue.value === 1) {
-      // go to small & semi-transparent
-      animatedValue.value = withTiming(0.5, { duration: 700 });
-      animatedHeight.value = withSpring(100);
-      animatedWidth.value = withSpring(100);
+    if (animatedHeight.value == 100) {
+      animatedHeight.value = withRepeat(withSpring(50), -1, true);
+      animatedWidth.value = withRepeat(withSpring(50), -1, true);
     } else {
-      // restore to full size and opacity
-      animatedValue.value = withTiming(1, { duration: 700 });
-      animatedHeight.value = withSpring(50);
-      animatedWidth.value = withSpring(50);
+      cancelAnimation(animatedHeight);
+      cancelAnimation(animatedWidth);
     }
   };
 
